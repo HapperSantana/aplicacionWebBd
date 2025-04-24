@@ -16,7 +16,8 @@ crearBtn.addEventListener("click", async(e)=>{
     let puestoInput = document.getElementById("puesto");
     let sueldoInput = document.getElementById("sueldo");
 
-        let respuesta = await database.from("empleados").insert({
+    if (nombresInput.value != "" && apellidosInput.value != "" && emailInput.value != "" && telefonoInput.value != "" && direccionInput.value != "" && sueldoInput.value != "") {
+      let respuesta = await database.from("empleados").insert({
         nombres:nombresInput.value,
         apellidos:apellidosInput.value,
         email:emailInput.value,
@@ -60,6 +61,19 @@ crearBtn.addEventListener("click", async(e)=>{
             }
           }).showToast();
     }
+    } else {
+      Toastify({
+        text: "Todos los campos son necesarios.",
+        className: "info",
+        style: {
+          background: "linear-gradient(to right,rgb(250, 41, 4),rgb(252, 13, 5))",
+        }
+      }).showToast();
+
+
+    }
+
+        
 })
 const getEmpleados =  async() => {
     let tbody = document.getElementById("tbody");
